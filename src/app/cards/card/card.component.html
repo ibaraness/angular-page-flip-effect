@@ -1,0 +1,64 @@
+<div class="card">
+  <div class="card-top">
+    <div class="card-content">
+      <h4>Card Title</h4>
+      <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sollicitudin tellus.
+      Praesent vel quam vestibulum, consectetur turpis quis, placerat nibh.
+      Donec semper augue id mauris tincidunt, a ullamcorper tortor volutpat.
+      In vulputate fermentum ultrices. Sed ornare mauris eu elementum elementum.
+      Donec non risus sem. Integer pulvinar sagittis neque quis accumsan.
+      Aenean feugiat pharetra metus et venenatis.
+      </p>
+      <p>
+        Sed ornare mauris eu elementum elementum.
+      Donec non risus sem. Integer pulvinar sagittis neque quis accumsan.
+      Aenean feugiat pharetra metus et venenatis.
+      </p>
+      <p>
+        Sed ornare mauris eu elementum elementum.
+      Donec non risus sem. Integer pulvinar sagittis neque quis accumsan.
+      Aenean feugiat pharetra metus et venenatis.
+      </p>
+      <p>
+          Donec vel sollicitudin tellus.
+          Praesent vel quam vestibulum, consectetur turpis quis, placerat nibh.
+          Donec semper augue id mauris tincidunt, a ullamcorper tortor volutpat.
+      </p>
+    </div>
+
+  </div>
+  <div class="card-bottom" [ngClass]="{ 'bottom-card-animation': bottomCardAnimation}" #cardBottom>
+      <div class="card-screen"></div>
+      <div class="card-content">
+          <h4>Card Title</h4>
+          <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sollicitudin tellus.
+          Praesent vel quam vestibulum, consectetur turpis quis, placerat nibh.
+          Donec semper augue id mauris tincidunt, a ullamcorper tortor volutpat.
+          In vulputate fermentum ultrices. Sed ornare mauris eu elementum elementum.
+          Donec non risus sem. Integer pulvinar sagittis neque quis accumsan.
+          Aenean feugiat pharetra metus et venenatis.
+          </p>
+          <p>
+            Sed ornare mauris eu elementum elementum.
+          Donec non risus sem. Integer pulvinar sagittis neque quis accumsan.
+          Aenean feugiat pharetra metus et venenatis.
+          </p>
+          <p>
+            Sed ornare mauris eu elementum elementum.
+          Donec non risus sem. Integer pulvinar sagittis neque quis accumsan.
+          Aenean feugiat pharetra metus et venenatis.
+          </p>
+          <p>
+              Donec vel sollicitudin tellus.
+              Praesent vel quam vestibulum, consectetur turpis quis, placerat nibh.
+              Donec semper augue id mauris tincidunt, a ullamcorper tortor volutpat.
+          </p>
+        </div>
+  </div>
+  <div class="buttons">
+    <button (click)="onClickUp(cardBottom)" class="btn">Up</button>
+    <button (click)="onClickDown(cardBottom)" class="btn">Down</button>
+  </div>
+</div>
