@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardsComponent implements OnInit {
 
+  topCardAnimation: boolean;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onAnimationBottomDone(){
+    this.topCardAnimation = true;
   }
 
 }

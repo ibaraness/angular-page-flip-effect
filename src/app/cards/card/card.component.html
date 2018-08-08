@@ -1,5 +1,8 @@
-<div class="card">
-  <div class="card-top">
+<div class="card" [id]="id" [ngClass]="{
+  'bottom-card': bottomCardAnimation,
+  'send-to-back': sendToBack
+}">
+  <div class="card-top" [ngClass]="{'flipped': topFlipped && !animationTop}">
     <div class="card-content">
       <h4>Card Title</h4>
       <p>

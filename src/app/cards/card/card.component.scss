@@ -4,6 +4,15 @@
   bottom: 0;
   left: 0;
   right: 0;
+  // background-color: rgba(0, 0, 0, 0.25);;
+  // transition: background-color .5s;
+  // &.bottom-card {
+  //   background-color:rgba(0, 0, 0, 0);
+  //   transition: background-color .5s;
+  // }
+  &.send-to-back {
+    z-index: -1;
+  }
   .card-content {
     padding: 10px;
     position: absolute;
@@ -20,6 +29,13 @@
     height: 50%;
     overflow: hidden;
     background-color: white;
+    transform: rotateX(0deg);
+    transform-origin: 0px 100%;
+    transition: transform .5s;
+    &.flipped {
+      transform: rotateX(-90deg);
+      transition: transform .5s;
+    }
     .card-content {
       top: 0;
     }
@@ -63,4 +79,21 @@
     }
   }
 
+}
+#seconedCard {
+  .card-bottom {
+    background-color: aquamarine;
+  }
+  .card-top {
+    background-color: aquamarine;
+  }
+}
+
+#firstCard {
+  .card-bottom {
+    background-color: blueviolet;
+  }
+  .card-top {
+    background-color: blueviolet;
+  }
 }
