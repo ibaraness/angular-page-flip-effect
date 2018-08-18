@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output, ElementRef} from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ElementRef, TemplateRef} from '@angular/core';
 import { cardAnimationTriggers } from './animation-triggers/animation-triggers';
 
 
@@ -22,6 +22,8 @@ export class CardComponent implements OnInit {
    * Animation top start state (active or inactive).
    */
   @Input() animationTop: string;
+
+  @Input() template: TemplateRef<any>;
 
   /**
    * Animation top start state (active or inactive).
