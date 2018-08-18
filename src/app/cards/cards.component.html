@@ -1,2 +1,18 @@
-<app-card [id]="'firstCard'" [topFlipped]="true" [animationTop]="topCardAnimation" #first></app-card>
-<app-card [id]="'seconedCard'" (animationBottomDone)="onAnimationBottomDone()"></app-card>
+<app-card *ngFor="let card of cards; let i = index"
+  [id]="card.id"
+  [topFlipped]="i < (cards.length - 1)"
+  [disable]="card.disable"
+  [animationTop]="i < (cards.length - 1) ? card.topState: 'active' "
+  [animationBottom]="card.bottomState"
+
+  [disableBottomAnimation]="i === (cards.length - 1) ? true: false"
+  [disableTopAnimation]="i === 0 ? true : false"
+
+  (bottomFoldInDone)="onBottomFoldInDone(i-1)"
+
+  (topFoldInStart)="onTopFoldInStart($event, i + 1)"
+
+  (topFoldInDone)="onTopFoldInDone($event, i + 1)"
+
+  (topFoldOutDone)="onTopFoldOutDone($event, i + 1)"
+  ></app-card>

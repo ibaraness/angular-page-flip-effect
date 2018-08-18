@@ -1,65 +1,144 @@
 import { Component, OnInit, Input, EventEmitter, Output, ElementRef} from '@angular/core';
+import { cardAnimationTriggers } from './animation-triggers/animation-triggers';
 
-function _bottomHandler(event) {
-  console.log('Bottom Done!', event.target);
-  event.target.removeEventListener('transitionend', bottomHandler);
-  if (this.animationBottomDone) {
-    this.animationBottomDone.emit(true);
-    this.sendToBack = true;
-  }
-}
-let bottomHandler;
-
-function _topHandler(event) {
-  console.log('Up Done!', event.target);
-  event.target.removeEventListener('transitionend', bottomHandler);
-  if (this.animationTopDone) {
-    this.animationTopDone.emit(true);
-  }
-}
-let topHandler;
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+  styleUrls: ['./card.component.scss'],
+  animations: cardAnimationTriggers
 })
 export class CardComponent implements OnInit {
+  /**
+   * Should the card top half should be fliped inwards by defaut
+   */
   @Input() topFlipped: boolean;
-  @Input() id: string;
-  _animateTop;
 
-  @Input('animationTop')
-  set animationTop(value) {
-    console.log('asdsa', value);
+  @Input() disableBottomAnimation: boolean;
+  @Input() disableTopAnimation: boolean;
+
+  @Input() id: string; //TODO: remove in prod
+  /**
+   * Animation top start state (active or inactive).
+   */
+  @Input() animationTop: string;
+
+  /**
+   * Animation top start state (active or inactive).
+   */
+  private _animationBottom = 'foldedOut';
+  get animationBottom() {
+    return this._animationBottom;
+  }
+  @Input()
+  set animationBottom(value) {
+    console.log("set animationBottom", value, this.id);
     if (value) {
-      const topElement = this.el.nativeElement.querySelector('.card-top');
-      topElement.addEventListener('transitionend', topHandler);
+      this._animationBottom = value;
     }
-    this._animateTop = value;
-  }
-  get animationTop(): boolean {
-    return this._animateTop;
+    if (value === 'foldedOut') {
+      this.sendToBack = false;
+    }
   }
 
-  @Output() animationBottomDone: EventEmitter<any> = new EventEmitter();
-  @Output() animationTopDone: EventEmitter<any> = new EventEmitter();
-  bottomCardAnimation = false;
+  /**
+   * Hide and disable card flag
+   */
+  @Input() disable: boolean;
+
+  /**
+   * Card content width and height must be pre-calculated for
+   * the effect to work propery. Only number should be set without 'px' prefix
+   */
+  @Input() cardWidth: string|number;
+  @Input() cardHeight: string|number;
+
+  @Output() bottomFoldInDone: EventEmitter<any> = new EventEmitter();
+  @Output() topFoldOutDone: EventEmitter<any> = new EventEmitter();
+
+  @Output() topFoldInDone: EventEmitter<any> = new EventEmitter();
+  @Output() topFoldInStart: EventEmitter<any> = new EventEmitter();
+
+  bottomCardScreenAnimation = 'transparent';
   sendToBack = false;
-  constructor(private el: ElementRef) { }
+
+  constructor() { }
 
   ngOnInit() {
-    bottomHandler = _bottomHandler.bind(this);
-    topHandler = _topHandler.bind(this);
+
   }
 
+  bottomAnimationDone(event) {
+    console.log('bottomAnimationDone', event, this.sendToBack);
+    if (event.toState === 'foldedIn' && event.fromState !== 'void') {
+
+      // Will trigger top fold-out animation
+      this.bottomFoldInDone.emit(true);
+
+      // Move card to the back, and the next to the front
+      this.sendToBack = true;
+    }
+  }
+
+  bottomAnimationStart(event) {
+    if (event.toState === 'foldedIn' && event.fromState !== 'void') {
+      this.bottomCardScreenAnimation = 'opaque';
+    } else if (event.toState === 'foldedOut' && event.fromState !== 'void') {
+      this.bottomCardScreenAnimation = 'transparent';
+    }
+    console.log("bottomAnimationStart", event);
+  }
+
+  topAnimationDone(event) {
+    console.log("topAnimationDone", event);
+    if (event.toState === 'foldedOut' && event.fromState !== 'void') {
+      console.log("topFoldOutDone");
+      this.topFoldOutDone.emit(true);
+    } else if (event.toState === 'foldedIn' && event.fromState !== 'void') {
+      this.topFoldInDone.emit(true);
+    }
+  }
+
+  topAnimationStart(event) {
+    if (event.toState === 'foldedIn' && event.fromState !== 'void'){
+      console.log("topAnimationStart")
+      this.topFoldInStart.emit(true);
+    }
+  }
+
+  animateBottomFoldIn(): void {
+    if (!this.disableTopAnimation) {
+      this.animationBottom = 'foldedIn';
+    }
+  }
+
+  animateBottomFoldOut(): void {
+    if (!this.disableTopAnimation) {
+      this.animationBottom = 'foldedOut';
+    }
+  }
+
+  animateTopFoldIn(): void {
+    if (!this.disableTopAnimation) {
+      this.animationTop = 'foldedIn';
+    }
+  }
+
+  animateTopFoldOut(): void {
+    if (!this.disableBottomAnimation) {
+      this.animationTop = 'foldedOut';
+    }
+  }
+
+  // TODO: remove on prod
   onClickUp(cardBottom) {
-    this.bottomCardAnimation = true;
-    cardBottom.addEventListener('transitionend', bottomHandler);
+    this.animateBottomFoldIn();
   }
 
   onClickDown() {
-    this.bottomCardAnimation = false;
+    if (!this.disableBottomAnimation) {
+      this.animationTop = 'foldedIn';
+    }
   }
 
 }

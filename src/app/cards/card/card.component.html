@@ -1,8 +1,15 @@
-<div class="card" [id]="id" [ngClass]="{
-  'bottom-card': bottomCardAnimation,
-  'send-to-back': sendToBack
+<div class="card"
+[id]="id"
+[ngClass]="{
+  'send-to-back': sendToBack,
+  'hide': disable
 }">
-  <div class="card-top" [ngClass]="{'flipped': topFlipped && !animationTop}">
+  <div class="card-top"
+
+  [@topCardState]="animationTop"
+  (@topCardState.done)="topAnimationDone($event)"
+  (@topCardState.start)="topAnimationStart($event)"
+  [ngClass]="{'flipped': topFlipped}">
     <div class="card-content">
       <h4>Card Title</h4>
       <p>
@@ -31,8 +38,12 @@
     </div>
 
   </div>
-  <div class="card-bottom" [ngClass]="{ 'bottom-card-animation': bottomCardAnimation}" #cardBottom>
-      <div class="card-screen"></div>
+  <div class="card-bottom"
+  [@bottomCardState]="animationBottom"
+  (@bottomCardState.done)="bottomAnimationDone($event)"
+  (@bottomCardState.start)="bottomAnimationStart($event)"
+  #cardBottom>
+      <div class="card-screen" [@bottomCardScreenState]="bottomCardScreenAnimation"></div>
       <div class="card-content">
           <h4>Card Title</h4>
           <p>

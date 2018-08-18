@@ -1,17 +1,31 @@
+/*
+Initial card position
+*/
 .card {
   position: fixed;
   top:0;
   bottom: 0;
   left: 0;
   right: 0;
-  // background-color: rgba(0, 0, 0, 0.25);;
-  // transition: background-color .5s;
-  // &.bottom-card {
-  //   background-color:rgba(0, 0, 0, 0);
-  //   transition: background-color .5s;
-  // }
+  z-index: 1;
+  transform-style: preserve-3d;
+  perspective: 1132px;
+  /*
+  After bottom animation is done,
+  We send the card to the back. The
+  Following card will be half visible with it's
+  Top flipped down so we don't see it yet.
+  */
   &.send-to-back {
-    z-index: -1;
+    z-index: 0;
+  }
+  /*
+  After top animation is done, we hide the
+  Card we've earlier sent to back, so we won't see it
+  after the next flip
+  */
+  &.hide {
+    display: none;
   }
   .card-content {
     padding: 10px;
@@ -31,10 +45,13 @@
     background-color: white;
     transform: rotateX(0deg);
     transform-origin: 0px 100%;
-    transition: transform .5s;
+    /*
+    Flips the top half of the card so
+    we in 90deg, so it's not visible, until flipped
+    back down.
+    */
     &.flipped {
       transform: rotateX(-90deg);
-      transition: transform .5s;
     }
     .card-content {
       top: 0;
@@ -50,12 +67,14 @@
     transform: rotateX(0deg);
     transform-origin: 0px 0px;
     overflow: hidden;
-    transition: transform .5s;
+
+    /*TODO: remove this part on angular animations */
+
     &.bottom-card-animation {
       transform: rotateX(90deg);
-      transition: transform .5s;
+      //transition: transform .5s;
       .card-screen {
-        transition: opacity .5s;
+        //transition: opacity .5s;
         opacity: 1;
       }
     }
@@ -64,7 +83,7 @@
       width:100%;
       height: 100%;
       background-color: #4c4c4c;
-      transition: opacity .5s;
+      //transition: opacity .5s;
       opacity: 0;
     }
   }
@@ -78,8 +97,9 @@
       border: 1px #525252 solid;
     }
   }
-
 }
+
+/* Test themes */
 #seconedCard {
   .card-bottom {
     background-color: aquamarine;
@@ -95,5 +115,23 @@
   }
   .card-top {
     background-color: blueviolet;
+  }
+}
+
+#thirdCard {
+  .card-bottom {
+    background-color: firebrick;
+  }
+  .card-top {
+    background-color: firebrick;
+  }
+}
+
+#forthCard {
+  .card-bottom {
+    background-color: blue;
+  }
+  .card-top {
+    background-color: blue;
   }
 }
