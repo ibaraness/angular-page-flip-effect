@@ -1,2 +1,20 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<app-cards></app-cards>
+<h1>Cards page flip animation</h1>
+<app-cards [width]="360" [height]="566" [cssClass]="'my-cards-container'" #cards></app-cards>
+<div class="buttons">
+  <button (click)="cards.flipUp()" class="btn">Up</button>
+  <button (click)="cards.flipDown()" class="btn">Down</button>
+</div>
+<p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sollicitudin tellus.
+Praesent vel quam vestibulum, consectetur turpis quis, placerat nibh.
+Donec semper augue id mauris tincidunt, a ullamcorper tortor volutpat.
+In vulputate fermentum ultrices. Sed ornare mauris eu elementum elementum.
+Donec non risus sem. Integer pulvinar sagittis neque quis accumsan.
+Aenean feugiat pharetra metus et venenatis.
+</p>
+<p>
+  Sed ornare mauris eu elementum elementum.
+Donec non risus sem. Integer pulvinar sagittis neque quis accumsan.
+Aenean feugiat pharetra metus et venenatis.
+</p>

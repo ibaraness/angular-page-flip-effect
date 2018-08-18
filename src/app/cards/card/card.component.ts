@@ -9,6 +9,8 @@ import { cardAnimationTriggers } from './animation-triggers/animation-triggers';
   animations: cardAnimationTriggers
 })
 export class CardComponent implements OnInit {
+  @Input() width: number;
+  @Input() height: number;
   /**
    * Should the card top half should be fliped inwards by defaut
    */
@@ -34,7 +36,7 @@ export class CardComponent implements OnInit {
   }
   @Input()
   set animationBottom(value) {
-    console.log("set animationBottom", value, this.id);
+    // console.log("set animationBottom", value, this.id);
     if (value) {
       this._animationBottom = value;
     }
@@ -71,7 +73,7 @@ export class CardComponent implements OnInit {
   }
 
   bottomAnimationDone(event) {
-    console.log('bottomAnimationDone', event, this.sendToBack);
+    // console.log('bottomAnimationDone', event, this.sendToBack);
     if (event.toState === 'foldedIn' && event.fromState !== 'void') {
 
       // Will trigger top fold-out animation
@@ -88,13 +90,13 @@ export class CardComponent implements OnInit {
     } else if (event.toState === 'foldedOut' && event.fromState !== 'void') {
       this.bottomCardScreenAnimation = 'transparent';
     }
-    console.log("bottomAnimationStart", event);
+    // console.log("bottomAnimationStart", event);
   }
 
   topAnimationDone(event) {
-    console.log("topAnimationDone", event);
+    // console.log("topAnimationDone", event);
     if (event.toState === 'foldedOut' && event.fromState !== 'void') {
-      console.log("topFoldOutDone");
+      // console.log("topFoldOutDone");
       this.topFoldOutDone.emit(true);
     } else if (event.toState === 'foldedIn' && event.fromState !== 'void') {
       this.topFoldInDone.emit(true);
@@ -103,12 +105,13 @@ export class CardComponent implements OnInit {
 
   topAnimationStart(event) {
     if (event.toState === 'foldedIn' && event.fromState !== 'void'){
-      console.log("topAnimationStart")
+      // console.log("topAnimationStart")
       this.topFoldInStart.emit(true);
     }
   }
 
   animateBottomFoldIn(): void {
+    console.log("dasfd", !this.disableTopAnimation)
     if (!this.disableTopAnimation) {
       this.animationBottom = 'foldedIn';
     }
@@ -121,7 +124,7 @@ export class CardComponent implements OnInit {
   }
 
   animateTopFoldIn(): void {
-    if (!this.disableTopAnimation) {
+    if (!this.disableBottomAnimation) {
       this.animationTop = 'foldedIn';
     }
   }
@@ -133,14 +136,15 @@ export class CardComponent implements OnInit {
   }
 
   // TODO: remove on prod
-  onClickUp(cardBottom) {
+  onClickUp() {
     this.animateBottomFoldIn();
   }
 
   onClickDown() {
-    if (!this.disableBottomAnimation) {
-      this.animationTop = 'foldedIn';
-    }
+    this.animateTopFoldIn();
+    // if (!this.disableBottomAnimation) {
+    //   this.animationTop = 'foldedIn';
+    // }
   }
 
 }

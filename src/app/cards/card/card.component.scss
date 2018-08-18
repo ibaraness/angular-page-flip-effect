@@ -2,14 +2,13 @@
 Initial card position
 */
 .card {
-  position: fixed;
+  position: absolute;
   top:0;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 1;
   transform-style: preserve-3d;
-  perspective: 1132px;
   /*
   After bottom animation is done,
   We send the card to the back. The
@@ -31,8 +30,6 @@ Initial card position
     padding: 10px;
     position: absolute;
     bottom: 0;
-    height: 566px;
-    width: 360px;
     box-sizing: border-box;
   }
   .card-top {
