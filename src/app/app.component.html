@@ -1,11 +1,11 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<h1>Cards page flip animation</h1>
-<app-cards [width]="360" [height]="566" [cssClass]="'my-cards-container'" #cards></app-cards>
-<div class="buttons">
+<h1 class="only-desktop">Cards page flip animation</h1>
+<app-cards *ngIf="cardsHeight && cardsWidth" [width]="cardsWidth" [height]="cardsHeight" [cssClass]="'my-cards-container'" #cards></app-cards>
+<div class="buttons only-desktop">
   <button (click)="cards.flipUp()" class="btn">Up</button>
   <button (click)="cards.flipDown()" class="btn">Down</button>
 </div>
-<p>
+<p class="only-desktop">
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sollicitudin tellus.
 Praesent vel quam vestibulum, consectetur turpis quis, placerat nibh.
 Donec semper augue id mauris tincidunt, a ullamcorper tortor volutpat.
@@ -13,7 +13,7 @@ In vulputate fermentum ultrices. Sed ornare mauris eu elementum elementum.
 Donec non risus sem. Integer pulvinar sagittis neque quis accumsan.
 Aenean feugiat pharetra metus et venenatis.
 </p>
-<p>
+<p class="only-desktop">
   Sed ornare mauris eu elementum elementum.
 Donec non risus sem. Integer pulvinar sagittis neque quis accumsan.
 Aenean feugiat pharetra metus et venenatis.
