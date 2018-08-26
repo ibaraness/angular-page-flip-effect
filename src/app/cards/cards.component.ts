@@ -1,3 +1,4 @@
+import { CardFlipPanComponent } from './card/card-flip-pan/card-flip-pan.component';
 import { CardComponent } from './card/card.component';
 import { Component, OnInit, ViewChildren, QueryList, AfterViewInit, Input, ViewEncapsulation } from '@angular/core';
 
@@ -11,8 +12,8 @@ export class CardsComponent implements OnInit, AfterViewInit {
   @Input() width: number;
   @Input() height: number;
   @Input() cssClass = "my-cards-container";
-  @ViewChildren(CardComponent) cardComponents: QueryList<CardComponent>;
-  cardComponentsArray: CardComponent[];
+  @ViewChildren(CardFlipPanComponent) cardComponents: QueryList<CardFlipPanComponent>;
+  cardComponentsArray: CardFlipPanComponent[];
   cards = [];
 
   private activeCardIndex;
@@ -39,6 +40,7 @@ export class CardsComponent implements OnInit, AfterViewInit {
       // Start top animation
       //console.log("Start top animation", this.cardComponents);
       if (this.cardComponentsArray) {
+        console.log("this.cardComponentsArray[index]", this.cardComponentsArray[index]);
         this.cardComponentsArray[index].animateTopFoldOut(); //.animationTop = "foldedOut";
         this.activeCardIndex = index;
       }
@@ -55,7 +57,7 @@ export class CardsComponent implements OnInit, AfterViewInit {
   }
 
   onTopFoldInDone(event, index) {
-    //console.log("onTopFoldInDone", event);
+    console.log("onTopFoldInDone", event);
     if (index < this.cards.length) {
       // this.cards[index].bottomState = 'inactive';
       this.cardComponentsArray[index].animateBottomFoldOut(); //animationBottom = 'foldedOut';

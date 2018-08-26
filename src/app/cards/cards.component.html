@@ -1,6 +1,6 @@
 <div class="cards-container" [ngClass]="cssClass" [ngStyle]="{'width.px': width, 'height.px': height}">
   <ng-container *ngFor="let card of cards; let i = index">
-  <app-card
+  <app-card-flip-pan
     [id]="card.id"
     [topFlipped]="i < (cards.length - 1)"
     [disable]="card.disable"
@@ -20,7 +20,7 @@
 
     (topFoldOutDone)="onTopFoldOutDone($event, i + 1)"
     >
-  </app-card>
+  </app-card-flip-pan>
   <ng-template #cardsContent>
       <h4>Card Title</h4>
       <p>

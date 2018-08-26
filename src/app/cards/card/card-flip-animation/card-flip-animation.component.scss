@@ -1,0 +1,145 @@
+/*
+Initial card position
+*/
+.card {
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  transform-style: preserve-3d;
+  /*
+  After bottom animation is done,
+  We send the card to the back. The
+  Following card will be half visible with it's
+  Top flipped down so we don't see it yet.
+  */
+  &.send-to-back {
+    z-index: 0;
+  }
+  /*
+  After top animation is done, we hide the
+  Card we've earlier sent to back, so we won't see it
+  after the next flip
+  */
+  &.hide {
+    display: none;
+  }
+  .card-touch-area {
+    position: absolute;
+    left: 0;
+    right:0;
+    bottom: 0;
+    top: 0;
+    z-index: 999;
+    width: 360px;
+    height: 566px;
+  }
+  .card-content {
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    box-sizing: border-box;
+  }
+  .card-top {
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height: 50%;
+    overflow: hidden;
+    background-color: white;
+    transform: rotateX(0deg);
+    transform-origin: 0px 100%;
+    /*
+    Flips the top half of the card so
+    we in 90deg, so it's not visible, until flipped
+    back down.
+    */
+    &.flipped {
+      transform: rotateX(-90deg);
+    }
+    .card-content {
+      top: 0;
+    }
+  }
+  .card-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background-color: white;
+    transform: rotateX(0deg);
+    transform-origin: 0px 0px;
+    overflow: hidden;
+    transition: transform .2s ease-out;
+
+    /*TODO: remove this part on angular animations */
+
+    &.bottom-card-animation {
+      transform: rotateX(90deg);
+      //transition: transform .5s;
+      .card-screen {
+        //transition: opacity .5s;
+        opacity: 1;
+      }
+    }
+    .card-screen {
+      position: absolute;
+      width:100%;
+      height: 100%;
+      background-color: #4c4c4c;
+      //transition: opacity .5s;
+      opacity: 0;
+    }
+  }
+  .buttons {
+    position: absolute;
+    .btn {
+      display: block;
+      color: white;
+      min-width: 100px;
+      background: #989898;
+      border: 1px #525252 solid;
+    }
+  }
+}
+
+/* Test themes */
+#seconedCard {
+  .card-bottom {
+    background-color: aquamarine;
+  }
+  .card-top {
+    background-color: aquamarine;
+  }
+}
+
+#firstCard {
+  .card-bottom {
+    background-color: blueviolet;
+  }
+  .card-top {
+    background-color: blueviolet;
+  }
+}
+
+#thirdCard {
+  .card-bottom {
+    background-color: firebrick;
+  }
+  .card-top {
+    background-color: firebrick;
+  }
+}
+
+#forthCard {
+  .card-bottom {
+    background-color: blue;
+  }
+  .card-top {
+    background-color: blue;
+  }
+}

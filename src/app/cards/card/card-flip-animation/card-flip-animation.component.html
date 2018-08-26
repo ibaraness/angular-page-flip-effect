@@ -1,0 +1,26 @@
+<div class="card" [id]="id"
+
+  [ngClass]="{
+    'send-to-back': sendToBack,
+    'hide': disable
+  }"
+  [ngStyle]="{'width.px': width, 'height.px': height, 'perspective.px': height * 3}">
+  <div class="card-top"
+    [@topCardState]="animationTop"
+    (@topCardState.done)="topAnimationDone($event)"
+    (@topCardState.start)="topAnimationStart($event)"
+    [ngClass]="{'flipped': topFlipped}">
+    <div *ngIf="template" class="card-content" [ngStyle]="{'width.px': width, 'height.px': height}">
+      <ng-container *ngTemplateOutlet="template"></ng-container>
+    </div>
+  </div>
+  <div class="card-bottom"
+    [@bottomCardState]="animationBottom"
+    (@bottomCardState.done)="bottomAnimationDone($event)"
+    (@bottomCardState.start)="bottomAnimationStart($event)">
+    <div class="card-screen" [@bottomCardScreenState]="bottomCardScreenAnimation"></div>
+    <div *ngIf="template" class="card-content" [ngStyle]="{'width.px': width, 'height.px': height}">
+      <ng-container *ngTemplateOutlet="template"></ng-container>
+    </div>
+  </div>
+</div>
