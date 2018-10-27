@@ -9,7 +9,8 @@
     [@topCardState]="animationTop"
     (@topCardState.done)="topAnimationDone($event)"
     (@topCardState.start)="topAnimationStart($event)"
-    [ngClass]="{'flipped': topFlipped}">
+    [ngClass]="{'flipped': topFlipped}"
+    [ngStyle]="{'transform':'rotateX(' + topDeg + 'deg)'}">
     <div *ngIf="template" class="card-content" [ngStyle]="{'width.px': width, 'height.px': height}">
       <ng-container *ngTemplateOutlet="template"></ng-container>
     </div>
@@ -17,7 +18,8 @@
   <div class="card-bottom"
     [@bottomCardState]="animationBottom"
     (@bottomCardState.done)="bottomAnimationDone($event)"
-    (@bottomCardState.start)="bottomAnimationStart($event)">
+    (@bottomCardState.start)="bottomAnimationStart($event)"
+    [ngStyle]="{'transform':'rotateX(' + bottomDeg + 'deg)'}">
     <div class="card-screen" [@bottomCardScreenState]="bottomCardScreenAnimation"></div>
     <div *ngIf="template" class="card-content" [ngStyle]="{'width.px': width, 'height.px': height}">
       <ng-container *ngTemplateOutlet="template"></ng-container>

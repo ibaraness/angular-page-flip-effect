@@ -15,7 +15,7 @@ export const cardAnimationTriggers = [
       transform: '*',
     })),
     state('foldedIn', style({
-      transform: '*',
+      transform: 'rotateX(90deg)',
     })),
     transition('foldedIn => foldedOut', [
       style({transform: '*'}),

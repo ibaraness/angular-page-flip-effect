@@ -7,6 +7,8 @@ import {
   TemplateRef
 } from "@angular/core";
 import { cardAnimationTriggers } from "../animation-triggers/animation-triggers";
+import { CardFlipAnimation } from "../../models/card-flip-anim";
+import { CardFlip } from "../../models/card-flip";
 
 @Component({
   selector: "app-card-flip-animation",
@@ -14,24 +16,13 @@ import { cardAnimationTriggers } from "../animation-triggers/animation-triggers"
   styleUrls: ["./card-flip-animation.component.scss"],
   animations: cardAnimationTriggers
 })
-export class CardFlipAnimationComponent implements OnInit {
-  // ***********[ Dimensions ] ************
-  /**
-   * Card content width and height must be pre-calculated for
-   * the effect to work propery. Only number should be set without 'px' prefix
-   */
-  @Input()
-  width: number;
-  @Input()
-  height: number;
+export class CardFlipAnimationComponent extends CardFlip implements OnInit, CardFlipAnimation {
 
-  // ***********[ Geometry settings ] ************
-
-  /**
+   /**
    * Should the card top half should be fliped inwards by defaut
    */
-  @Input()
-  topFlipped: boolean;
+  // @Input()
+  // topFlipped: boolean;
 
   // ***********[ animation ] ************
 
@@ -92,8 +83,6 @@ export class CardFlipAnimationComponent implements OnInit {
   public bottomCardScreenAnimation = "transparent";
   public sendToBack = false;
 
-  constructor() {}
-
   ngOnInit() {}
 
   bottomAnimationDone(event) {
@@ -142,8 +131,9 @@ export class CardFlipAnimationComponent implements OnInit {
   }
 
   animateBottomFoldOut(): void {
-    console.log("animateBottomFoldOut", this.animationBottom)
+
     if (!this.disableTopAnimation) {
+      console.log("animateBottomFoldOut", this.animationBottom)
       this.animationBottom = "foldedOut";
     }
   }

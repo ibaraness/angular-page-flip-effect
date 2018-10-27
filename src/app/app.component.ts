@@ -12,9 +12,12 @@ export class AppComponent implements AfterViewInit {
   cardsHeight;
 
   ngAfterViewInit(): void {
-    console.log("windowSize", window.innerWidth, window.innerHeight);
-    this.cardsWidth = window.innerWidth;
-    this.cardsHeight = window.innerHeight;
+    setTimeout(() => {
+      console.log("windowSize", window.innerWidth, window.innerHeight);
+      this.cardsWidth = 300;//window.innerWidth;
+      this.cardsHeight = 600;//window.innerHeight;
+    });
+
   }
 
 }

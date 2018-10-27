@@ -1,8 +1,7 @@
 <div class="cards-container" [ngClass]="cssClass" [ngStyle]="{'width.px': width, 'height.px': height}">
-  <ng-container *ngFor="let card of cards; let i = index">
-  <app-card-flip-pan
+<ng-container *ngFor="let card of cards; let i = index">
+  <app-card-flip-animation
     [id]="card.id"
-    [topFlipped]="i < (cards.length - 1)"
     [disable]="card.disable"
     [animationTop]="i < (cards.length - 1) ? card.topState: 'active' "
     [animationBottom]="card.bottomState"
@@ -11,16 +10,12 @@
     [disableBottomAnimation]="i === (cards.length - 1) ? true: false"
     [disableTopAnimation]="i === 0 ? true : false"
     [template]="cardsContent"
-
     (bottomFoldInDone)="onBottomFoldInDone(i-1)"
-
     (topFoldInStart)="onTopFoldInStart($event, i + 1)"
-
     (topFoldInDone)="onTopFoldInDone($event, i + 1)"
-
     (topFoldOutDone)="onTopFoldOutDone($event, i + 1)"
     >
-  </app-card-flip-pan>
+  </app-card-flip-animation>
   <ng-template #cardsContent>
       <h4>Card Title</h4>
       <p>
@@ -47,6 +42,9 @@
           Donec semper augue id mauris tincidunt, a ullamcorper tortor volutpat.
       </p>
   </ng-template>
+  <ng-content #templateContainer>
+
+  </ng-content>
 </ng-container>
 </div>
 

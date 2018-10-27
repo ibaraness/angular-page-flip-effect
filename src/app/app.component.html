@@ -1,6 +1,11 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <h1 class="only-desktop">Cards page flip animation</h1>
-<app-cards *ngIf="cardsHeight && cardsWidth" [width]="cardsWidth" [height]="cardsHeight" [cssClass]="'my-cards-container'" #cards></app-cards>
+<app-cards [width]="cardsWidth" [height]="cardsHeight" [cssClass]="'my-cards-container'" #cards>
+  <app-card-template>
+    <a href="#">First card</a>
+  </app-card-template>
+  <div>dsfkjfdslkj</div>
+</app-cards>
 <div class="buttons only-desktop">
   <button (click)="cards.flipUp()" class="btn">Up</button>
   <button (click)="cards.flipDown()" class="btn">Down</button>
